@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIResponder+LazyTableImageAspect.h"
 
-@interface KXMasterViewController : UITableViewController
+@interface KXMasterViewController : UITableViewController<LazyTableImageAspect>
 
 @end

@@ -7,12 +7,16 @@
 //
 
 #import "KXMasterViewController.h"
-
 #import "KXDetailViewController.h"
+#import "UIResponder+LazyTableImageAspect.h"
+#import "AppRecord.h"
 
-@interface KXMasterViewController () {
-    NSMutableArray *_objects;
+@interface KXMasterViewController ()
+{
+    NSOperationQueue *_operationQueue;
 }
+@property (nonatomic) NSArray *apps;
+
 @end
 
 @implementation KXMasterViewController
@@ -25,11 +29,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
+    //
+    _operationQueue = [[NSOperationQueue alloc] init];
+    // LazyTableImageAspectを使用
+    [self useLazyTableImageAspect];
+    // 読み込み
+    __block __weak typeof (self) __self = self;
+    AFHTTPRequestOperation *operation = [AppRecord downloadAppsOperationWithCompletion:^(NSArray *apps, NSError *error) {
+        if (!error) {
+            __self.apps = apps;
+            [__self.tableView reloadData];
+        }
+    }];
+    [self.operationQueue addOperation:operation];
 }
 
 - (void)didReceiveMemoryWarning
@@ -38,17 +50,19 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)insertNewObject:(id)sender
-{
-    if (!_objects) {
-        _objects = [[NSMutableArray alloc] init];
+- (IBAction)clearImages:(id)sender {
+    for (AppRecord *app in self.apps) {
+        app.appIcon = nil;
     }
-    [_objects insertObject:[NSDate date] atIndex:0];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table View
+
+- (AppRecord*)modelForTableView:(UITableView*)tableView atIndexPath:(NSIndexPath*)indexPath
+{
+    return (_apps.count > 0) ? _apps[indexPath.row] : nil;
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -57,57 +71,81 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _objects.count;
+    return _apps.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-
-    NSDate *object = _objects[indexPath.row];
-    cell.textLabel.text = [object description];
+    // 対応するappレコードを取得
+    AppRecord *app = [self modelForTableView:tableView atIndexPath:indexPath];
+    // データをassign
+    cell.textLabel.text = [app appName];
+    cell.detailTextLabel.text = [app artist];
+    if (app.appIcon) {
+        // iconがすでにダウンロード済みならassign
+        cell.imageView.image = app.appIcon;
+    }else{
+        // まだならplaceholderを代入してlazy download を開始
+        if (!tableView.dragging && !tableView.decelerating) {
+            [self startImageDownloadForTableView:tableView atIndexPath:indexPath];
+        }
+        cell.imageView.image = [UIImage imageNamed:@"ph"];
+    }
     return cell;
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark - Lazy Table Image
+
+- (NSURL *)lazyTableImageURLForTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return [[self modelForTableView:tableView atIndexPath:indexPath] appIconURL];
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)lazyTableImageDidFinishDownload:(UIImage *)image forURL:(NSURL *)URL tableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [_objects removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    AppRecord *app = [self modelForTableView:tableView atIndexPath:indexPath];
+    app.appIcon = image;
+    [UIView transitionWithView:cell.imageView duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        cell.imageView.image = image;
+    } completion:NULL];
 }
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+- (BOOL)lazyTableImageShouldStartDownloadForURL:(NSURL *)URL tableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath
 {
+    return [[self modelForTableView:tableView atIndexPath:indexPath] appIcon] ? NO : YES;
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+#pragma mark - Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDate *object = _objects[indexPath.row];
+        NSDate *object = _apps[indexPath.row];
         [[segue destinationViewController] setDetailItem:object];
     }
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    NSLog(@"scrolling!");
+    self.title = @"scrolling!";
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    NSLog(@"did end decelerating");
+    self.title = @"end decelearating";
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    NSLog(@"did end dragging!");
+    self.title = @"end dragging!";
 }
 
 @end
