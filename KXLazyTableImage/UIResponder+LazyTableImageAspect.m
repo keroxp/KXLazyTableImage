@@ -12,30 +12,8 @@
 
 const char *kOperationQueueKey = "me.keroxp.app:operationQueue";
 const char *kDownloadsInProgressKey = "me.keroxp.app:downloadsInProgress";
-const char *kUseThisAspect = "me.keroxp.app:useThisAspect";
 
 @implementation UIViewController (LazyImageAspect)
-
-#pragma mark -
-
-- (void)forwardInvocation:(NSInvocation *)anInvocation
-{
-    [anInvocation invokeWithTarget:self];
-}
-
-- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector
-{
-    // アスペクトを纏ったクラスがscrollView~を実装していなかった場合このクラスのメソッドに迂回させる
-    BOOL useThisAspect = [objc_getAssociatedObject(self, kUseThisAspect) boolValue];
-    if (useThisAspect) {
-        if (aSelector == @selector(scrollViewDidEndDecelerating:)) {
-            return [self methodSignatureForSelector:@selector(_scrollViewDidEndDecelerating:)];
-        }else if (aSelector == @selector(scrollViewDidEndDragging:willDecelerate:)){
-            return [self methodSignatureForSelector:@selector(_scrollViewDidEndDragging:willDecelerate:)];
-        }
-    }
-    return [NSMethodSignature methodSignatureForSelector:aSelector];
-}
 
 - (void)swizzleMethod:(SEL)method1 withMethod:(SEL)method2
 {
@@ -59,8 +37,6 @@ const char *kUseThisAspect = "me.keroxp.app:useThisAspect";
 
 - (void)useLazyTableImageAspect
 {
-    // アスペクトの使用許可
-    objc_setAssociatedObject(self, kUseThisAspect, @(YES), OBJC_ASSOCIATION_ASSIGN);
     // methodを入れ替える
     [self swizzleMethod:@selector(scrollViewDidEndDecelerating:) withMethod:@selector(_scrollViewDidEndDecelerating:)];
     [self swizzleMethod:@selector(scrollViewDidEndDragging:willDecelerate:) withMethod:@selector(_scrollViewDidEndDragging:willDecelerate:)];
@@ -124,14 +100,16 @@ const char *kUseThisAspect = "me.keroxp.app:useThisAspect";
 {
     [self _scrollViewDidEndDecelerating:scrollView];
     // ダウンロード開始
-    [self loadImagesOnScreenRows:(UITableView*)scrollView];
+    if ([scrollView isKindOfClass:[UITableView class]]) {
+        [self loadImagesOnScreenRows:(UITableView*)scrollView];
+    }
 }
 
 - (void)_scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     [self _scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
     // ダウンロード開始
-    if (!decelerate) {
+    if (!decelerate && [scrollView isKindOfClass:[UITableView class]]) {
         [self loadImagesOnScreenRows:(UITableView*)scrollView];
     }
 }
@@ -141,11 +119,6 @@ const char *kUseThisAspect = "me.keroxp.app:useThisAspect";
 - (UIResponder<LazyTableImageAspect>*)target
 {
     return (UIResponder<LazyTableImageAspect>*)self;
-}
-
-- (void)setOperationQueue:(NSOperationQueue *)operationQueue
-{
-    objc_setAssociatedObject(self, kOperationQueueKey, operationQueue, OBJC_ASSOCIATION_RETAIN);
 }
 
 - (NSOperationQueue *)operationQueue
