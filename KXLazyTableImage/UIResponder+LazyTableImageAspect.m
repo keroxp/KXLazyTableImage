@@ -12,7 +12,6 @@
 
 const char *kOperationQueueKey = "me.keroxp.app:operationQueue";
 const char *kDownloadsInProgressKey = "me.keroxp.app:downloadsInProgress";
-const char *kUseThisAspect = "me.keroxp.app:useThisAspect";
 
 @implementation UIViewController (LazyImageAspect)
 
@@ -38,8 +37,6 @@ const char *kUseThisAspect = "me.keroxp.app:useThisAspect";
 
 - (void)useLazyTableImageAspect
 {
-    // アスペクトの使用許可
-    objc_setAssociatedObject(self, kUseThisAspect, @(YES), OBJC_ASSOCIATION_ASSIGN);
     // methodを入れ替える
     [self swizzleMethod:@selector(scrollViewDidEndDecelerating:) withMethod:@selector(_scrollViewDidEndDecelerating:)];
     [self swizzleMethod:@selector(scrollViewDidEndDragging:willDecelerate:) withMethod:@selector(_scrollViewDidEndDragging:willDecelerate:)];
@@ -120,11 +117,6 @@ const char *kUseThisAspect = "me.keroxp.app:useThisAspect";
 - (UIResponder<LazyTableImageAspect>*)target
 {
     return (UIResponder<LazyTableImageAspect>*)self;
-}
-
-- (void)setOperationQueue:(NSOperationQueue *)operationQueue
-{
-    objc_setAssociatedObject(self, kOperationQueueKey, operationQueue, OBJC_ASSOCIATION_RETAIN);
 }
 
 - (NSOperationQueue *)operationQueue
