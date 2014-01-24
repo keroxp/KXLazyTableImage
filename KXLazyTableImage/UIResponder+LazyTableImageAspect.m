@@ -101,14 +101,16 @@ const char *kUseThisAspect = "me.keroxp.app:useThisAspect";
 {
     [self _scrollViewDidEndDecelerating:scrollView];
     // ダウンロード開始
-    [self loadImagesOnScreenRows:(UITableView*)scrollView];
+    if ([scrollView isKindOfClass:[UITableView class]]) {
+        [self loadImagesOnScreenRows:(UITableView*)scrollView];
+    }
 }
 
 - (void)_scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     [self _scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
     // ダウンロード開始
-    if (!decelerate) {
+    if (!decelerate && [scrollView isKindOfClass:[UITableView class]]) {
         [self loadImagesOnScreenRows:(UITableView*)scrollView];
     }
 }
