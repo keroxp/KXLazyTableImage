@@ -16,27 +16,6 @@ const char *kUseThisAspect = "me.keroxp.app:useThisAspect";
 
 @implementation UIViewController (LazyImageAspect)
 
-#pragma mark -
-
-- (void)forwardInvocation:(NSInvocation *)anInvocation
-{
-    [anInvocation invokeWithTarget:self];
-}
-
-- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector
-{
-    // アスペクトを纏ったクラスがscrollView~を実装していなかった場合このクラスのメソッドに迂回させる
-    BOOL useThisAspect = [objc_getAssociatedObject(self, kUseThisAspect) boolValue];
-    if (useThisAspect) {
-        if (aSelector == @selector(scrollViewDidEndDecelerating:)) {
-            return [self methodSignatureForSelector:@selector(_scrollViewDidEndDecelerating:)];
-        }else if (aSelector == @selector(scrollViewDidEndDragging:willDecelerate:)){
-            return [self methodSignatureForSelector:@selector(_scrollViewDidEndDragging:willDecelerate:)];
-        }
-    }
-    return [NSMethodSignature methodSignatureForSelector:aSelector];
-}
-
 - (void)swizzleMethod:(SEL)method1 withMethod:(SEL)method2
 {
     Method from_m = class_getInstanceMethod([self class], method1);
