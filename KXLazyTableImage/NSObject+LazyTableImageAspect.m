@@ -63,12 +63,14 @@ const char *kDownloadsInProgressKey = "me.keroxp.app:downloadsInProgress";
                 [[self target] lazyTableImageDidFinishDownload:image forURL:url tableView:tableView indexPath:indexPath];
             }];
         }else{
-            UITableViewCell *cell= [tableView cellForRowAtIndexPath:indexPath];
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                [UIView transitionWithView:cell.imageView duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-                    [cell.imageView setImage:image];
-                } completion:NULL];
-            }];
+            if ([[tableView indexPathsForVisibleRows] containsObject:indexPath]) {
+                UITableViewCell *cell= [tableView cellForRowAtIndexPath:indexPath];
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    [UIView transitionWithView:cell.imageView duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                        [cell.imageView setImage:image];
+                    } completion:NULL];
+                }];
+            }
         }
         [[self downloadsInProgress] removeObjectForKey:indexPath];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
