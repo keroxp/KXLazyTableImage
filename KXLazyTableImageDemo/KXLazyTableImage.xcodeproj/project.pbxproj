@@ -7,41 +7,41 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		23F45CEC1896344000FF6696 /* AppRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F45CDB1896344000FF6696 /* AppRecord.m */; };
-		23F45CED1896344000FF6696 /* apps.json in Resources */ = {isa = PBXBuildFile; fileRef = 23F45CDC1896344000FF6696 /* apps.json */; };
-		23F45CEE1896344000FF6696 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23F45CDD1896344000FF6696 /* Main.storyboard */; };
-		23F45CEF1896344000FF6696 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 23F45CDF1896344000FF6696 /* InfoPlist.strings */; };
-		23F45CF01896344000FF6696 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23F45CE11896344000FF6696 /* Images.xcassets */; };
-		23F45CF11896344000FF6696 /* KXAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F45CE31896344000FF6696 /* KXAppDelegate.m */; };
-		23F45CF21896344000FF6696 /* KXDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F45CE51896344000FF6696 /* KXDetailViewController.m */; };
-		23F45CF31896344000FF6696 /* KXLazyTableImage-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 23F45CE61896344000FF6696 /* KXLazyTableImage-Info.plist */; };
-		23F45CF41896344000FF6696 /* KXMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F45CE91896344000FF6696 /* KXMasterViewController.m */; };
-		23F45CF51896344000FF6696 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F45CEA1896344000FF6696 /* main.m */; };
-		23F45CF61896344000FF6696 /* ph@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 23F45CEB1896344000FF6696 /* ph@2x.png */; };
+		23F45D0B18963D3400FF6696 /* AppRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F45CF818963D3400FF6696 /* AppRecord.m */; };
+		23F45D0C18963D3400FF6696 /* apps.json in Resources */ = {isa = PBXBuildFile; fileRef = 23F45CF918963D3400FF6696 /* apps.json */; };
+		23F45D0D18963D3400FF6696 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23F45CFB18963D3400FF6696 /* Main.storyboard */; };
+		23F45D0E18963D3400FF6696 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 23F45CFE18963D3400FF6696 /* InfoPlist.strings */; };
+		23F45D0F18963D3400FF6696 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23F45D0018963D3400FF6696 /* Images.xcassets */; };
+		23F45D1018963D3400FF6696 /* KXAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F45D0218963D3400FF6696 /* KXAppDelegate.m */; };
+		23F45D1118963D3400FF6696 /* KXDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F45D0418963D3400FF6696 /* KXDetailViewController.m */; };
+		23F45D1318963D3400FF6696 /* KXMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F45D0818963D3400FF6696 /* KXMasterViewController.m */; };
+		23F45D1418963D3400FF6696 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 23F45D0918963D3400FF6696 /* main.m */; };
+		23F45D1518963D3400FF6696 /* ph@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 23F45D0A18963D3400FF6696 /* ph@2x.png */; };
 		A67C54C71890086800DA0E12 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A67C54C61890086800DA0E12 /* Foundation.framework */; };
 		A67C54C91890086800DA0E12 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A67C54C81890086800DA0E12 /* CoreGraphics.framework */; };
 		A67C54CB1890086800DA0E12 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A67C54CA1890086800DA0E12 /* UIKit.framework */; };
-		A67C55001890088700DA0E12 /* NSObject+LazyTableImageAspect.m in Sources */ = {isa = PBXBuildFile; fileRef = A67C54FF1890088700DA0E12 /* NSObject+LazyTableImageAspect.m */; };
 		C9A5926AB1614B68916E0174 /* libPods-KXLazyTableImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5032AC08E458413898235E2D /* libPods-KXLazyTableImage.a */; };
+		D02E91B6F536460CB42EC083 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 044A4F511AE14B6C8C87B8E2 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		23F45CDA1896344000FF6696 /* AppRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppRecord.h; sourceTree = "<group>"; };
-		23F45CDB1896344000FF6696 /* AppRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppRecord.m; sourceTree = "<group>"; };
-		23F45CDC1896344000FF6696 /* apps.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = apps.json; sourceTree = "<group>"; };
-		23F45CDE1896344000FF6696 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		23F45CE01896344000FF6696 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		23F45CE11896344000FF6696 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		23F45CE21896344000FF6696 /* KXAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KXAppDelegate.h; sourceTree = "<group>"; };
-		23F45CE31896344000FF6696 /* KXAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KXAppDelegate.m; sourceTree = "<group>"; };
-		23F45CE41896344000FF6696 /* KXDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KXDetailViewController.h; sourceTree = "<group>"; };
-		23F45CE51896344000FF6696 /* KXDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KXDetailViewController.m; sourceTree = "<group>"; };
-		23F45CE61896344000FF6696 /* KXLazyTableImage-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "KXLazyTableImage-Info.plist"; sourceTree = "<group>"; };
-		23F45CE71896344000FF6696 /* KXLazyTableImage-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KXLazyTableImage-Prefix.pch"; sourceTree = "<group>"; };
-		23F45CE81896344000FF6696 /* KXMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KXMasterViewController.h; sourceTree = "<group>"; };
-		23F45CE91896344000FF6696 /* KXMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KXMasterViewController.m; sourceTree = "<group>"; };
-		23F45CEA1896344000FF6696 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		23F45CEB1896344000FF6696 /* ph@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ph@2x.png"; sourceTree = "<group>"; };
+		044A4F511AE14B6C8C87B8E2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		23F45CF718963D3400FF6696 /* AppRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppRecord.h; path = KXLazyTableImageDemo/AppRecord.h; sourceTree = "<group>"; };
+		23F45CF818963D3400FF6696 /* AppRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppRecord.m; path = KXLazyTableImageDemo/AppRecord.m; sourceTree = "<group>"; };
+		23F45CF918963D3400FF6696 /* apps.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = apps.json; path = KXLazyTableImageDemo/apps.json; sourceTree = "<group>"; };
+		23F45CFC18963D3400FF6696 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
+		23F45CFF18963D3400FF6696 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
+		23F45D0018963D3400FF6696 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = KXLazyTableImageDemo/Images.xcassets; sourceTree = "<group>"; };
+		23F45D0118963D3400FF6696 /* KXAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KXAppDelegate.h; path = KXLazyTableImageDemo/KXAppDelegate.h; sourceTree = "<group>"; };
+		23F45D0218963D3400FF6696 /* KXAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KXAppDelegate.m; path = KXLazyTableImageDemo/KXAppDelegate.m; sourceTree = "<group>"; };
+		23F45D0318963D3400FF6696 /* KXDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KXDetailViewController.h; path = KXLazyTableImageDemo/KXDetailViewController.h; sourceTree = "<group>"; };
+		23F45D0418963D3400FF6696 /* KXDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KXDetailViewController.m; path = KXLazyTableImageDemo/KXDetailViewController.m; sourceTree = "<group>"; };
+		23F45D0518963D3400FF6696 /* KXLazyTableImage-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "KXLazyTableImage-Info.plist"; path = "KXLazyTableImageDemo/KXLazyTableImage-Info.plist"; sourceTree = "<group>"; };
+		23F45D0618963D3400FF6696 /* KXLazyTableImage-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "KXLazyTableImage-Prefix.pch"; path = "KXLazyTableImageDemo/KXLazyTableImage-Prefix.pch"; sourceTree = "<group>"; };
+		23F45D0718963D3400FF6696 /* KXMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KXMasterViewController.h; path = KXLazyTableImageDemo/KXMasterViewController.h; sourceTree = "<group>"; };
+		23F45D0818963D3400FF6696 /* KXMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KXMasterViewController.m; path = KXLazyTableImageDemo/KXMasterViewController.m; sourceTree = "<group>"; };
+		23F45D0918963D3400FF6696 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = KXLazyTableImageDemo/main.m; sourceTree = "<group>"; };
+		23F45D0A18963D3400FF6696 /* ph@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ph@2x.png"; path = "KXLazyTableImageDemo/ph@2x.png"; sourceTree = "<group>"; };
 		27F62028A6E1480884EA38FB /* Pods-KXLazyTableImage.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KXLazyTableImage.xcconfig"; path = "Pods/Pods-KXLazyTableImage.xcconfig"; sourceTree = "<group>"; };
 		5032AC08E458413898235E2D /* libPods-KXLazyTableImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KXLazyTableImage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A67C54C31890086800DA0E12 /* KXLazyTableImage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KXLazyTableImage.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,8 +49,7 @@
 		A67C54C81890086800DA0E12 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		A67C54CA1890086800DA0E12 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A67C54E81890086800DA0E12 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		A67C54FE1890088700DA0E12 /* NSObject+LazyTableImageAspect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+LazyTableImageAspect.h"; sourceTree = "<group>"; };
-		A67C54FF1890088700DA0E12 /* NSObject+LazyTableImageAspect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+LazyTableImageAspect.m"; sourceTree = "<group>"; };
+		F154B66741ED43EDAF4E8DD2 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,43 +61,70 @@
 				A67C54CB1890086800DA0E12 /* UIKit.framework in Frameworks */,
 				A67C54C71890086800DA0E12 /* Foundation.framework in Frameworks */,
 				C9A5926AB1614B68916E0174 /* libPods-KXLazyTableImage.a in Frameworks */,
+				D02E91B6F536460CB42EC083 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		23F45CD91896344000FF6696 /* KXLazyTableImageExample */ = {
+		23F45CFA18963D3400FF6696 /* Base.lproj */ = {
 			isa = PBXGroup;
 			children = (
-				23F45CDA1896344000FF6696 /* AppRecord.h */,
-				23F45CDB1896344000FF6696 /* AppRecord.m */,
-				23F45CDC1896344000FF6696 /* apps.json */,
-				23F45CDD1896344000FF6696 /* Main.storyboard */,
-				23F45CDF1896344000FF6696 /* InfoPlist.strings */,
-				23F45CE11896344000FF6696 /* Images.xcassets */,
-				23F45CE21896344000FF6696 /* KXAppDelegate.h */,
-				23F45CE31896344000FF6696 /* KXAppDelegate.m */,
-				23F45CE41896344000FF6696 /* KXDetailViewController.h */,
-				23F45CE51896344000FF6696 /* KXDetailViewController.m */,
-				23F45CE61896344000FF6696 /* KXLazyTableImage-Info.plist */,
-				23F45CE71896344000FF6696 /* KXLazyTableImage-Prefix.pch */,
-				23F45CE81896344000FF6696 /* KXMasterViewController.h */,
-				23F45CE91896344000FF6696 /* KXMasterViewController.m */,
-				23F45CEA1896344000FF6696 /* main.m */,
-				23F45CEB1896344000FF6696 /* ph@2x.png */,
+				23F45CFB18963D3400FF6696 /* Main.storyboard */,
 			);
-			path = KXLazyTableImageExample;
+			name = Base.lproj;
+			path = KXLazyTableImageDemo/Base.lproj;
+			sourceTree = "<group>";
+		};
+		23F45CFD18963D3400FF6696 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				23F45CFE18963D3400FF6696 /* InfoPlist.strings */,
+			);
+			name = en.lproj;
+			path = KXLazyTableImageDemo/en.lproj;
+			sourceTree = "<group>";
+		};
+		23F45D1618963D8900FF6696 /* Supporting FIles */ = {
+			isa = PBXGroup;
+			children = (
+				23F45CF918963D3400FF6696 /* apps.json */,
+				23F45D0518963D3400FF6696 /* KXLazyTableImage-Info.plist */,
+				23F45D0618963D3400FF6696 /* KXLazyTableImage-Prefix.pch */,
+				23F45D0918963D3400FF6696 /* main.m */,
+				23F45D0A18963D3400FF6696 /* ph@2x.png */,
+			);
+			name = "Supporting FIles";
+			sourceTree = "<group>";
+		};
+		23F45D1718963D9800FF6696 /* KXLazyTableImage */ = {
+			isa = PBXGroup;
+			children = (
+				23F45CF718963D3400FF6696 /* AppRecord.h */,
+				23F45CF818963D3400FF6696 /* AppRecord.m */,
+				23F45D0118963D3400FF6696 /* KXAppDelegate.h */,
+				23F45D0218963D3400FF6696 /* KXAppDelegate.m */,
+				23F45D0318963D3400FF6696 /* KXDetailViewController.h */,
+				23F45D0418963D3400FF6696 /* KXDetailViewController.m */,
+				23F45D0718963D3400FF6696 /* KXMasterViewController.h */,
+				23F45D0818963D3400FF6696 /* KXMasterViewController.m */,
+			);
+			name = KXLazyTableImage;
 			sourceTree = "<group>";
 		};
 		A67C54BA1890086800DA0E12 = {
 			isa = PBXGroup;
 			children = (
-				23F45CD91896344000FF6696 /* KXLazyTableImageExample */,
-				A67C54CC1890086800DA0E12 /* KXLazyTableImage */,
+				23F45D1718963D9800FF6696 /* KXLazyTableImage */,
+				23F45D1618963D8900FF6696 /* Supporting FIles */,
+				23F45CFA18963D3400FF6696 /* Base.lproj */,
+				23F45CFD18963D3400FF6696 /* en.lproj */,
+				23F45D0018963D3400FF6696 /* Images.xcassets */,
 				A67C54C51890086800DA0E12 /* Frameworks */,
 				A67C54C41890086800DA0E12 /* Products */,
 				27F62028A6E1480884EA38FB /* Pods-KXLazyTableImage.xcconfig */,
+				F154B66741ED43EDAF4E8DD2 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -118,17 +144,9 @@
 				A67C54CA1890086800DA0E12 /* UIKit.framework */,
 				A67C54E81890086800DA0E12 /* XCTest.framework */,
 				5032AC08E458413898235E2D /* libPods-KXLazyTableImage.a */,
+				044A4F511AE14B6C8C87B8E2 /* libPods.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		A67C54CC1890086800DA0E12 /* KXLazyTableImage */ = {
-			isa = PBXGroup;
-			children = (
-				A67C54FE1890088700DA0E12 /* NSObject+LazyTableImageAspect.h */,
-				A67C54FF1890088700DA0E12 /* NSObject+LazyTableImageAspect.m */,
-			);
-			path = KXLazyTableImage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,12 +204,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				23F45CF31896344000FF6696 /* KXLazyTableImage-Info.plist in Resources */,
-				23F45CED1896344000FF6696 /* apps.json in Resources */,
-				23F45CF61896344000FF6696 /* ph@2x.png in Resources */,
-				23F45CF01896344000FF6696 /* Images.xcassets in Resources */,
-				23F45CEF1896344000FF6696 /* InfoPlist.strings in Resources */,
-				23F45CEE1896344000FF6696 /* Main.storyboard in Resources */,
+				23F45D0C18963D3400FF6696 /* apps.json in Resources */,
+				23F45D1518963D3400FF6696 /* ph@2x.png in Resources */,
+				23F45D0F18963D3400FF6696 /* Images.xcassets in Resources */,
+				23F45D0E18963D3400FF6696 /* InfoPlist.strings in Resources */,
+				23F45D0D18963D3400FF6696 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,7 +242,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-KXLazyTableImage-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -235,30 +252,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				23F45CF21896344000FF6696 /* KXDetailViewController.m in Sources */,
-				23F45CEC1896344000FF6696 /* AppRecord.m in Sources */,
-				A67C55001890088700DA0E12 /* NSObject+LazyTableImageAspect.m in Sources */,
-				23F45CF41896344000FF6696 /* KXMasterViewController.m in Sources */,
-				23F45CF51896344000FF6696 /* main.m in Sources */,
-				23F45CF11896344000FF6696 /* KXAppDelegate.m in Sources */,
+				23F45D1418963D3400FF6696 /* main.m in Sources */,
+				23F45D1118963D3400FF6696 /* KXDetailViewController.m in Sources */,
+				23F45D1318963D3400FF6696 /* KXMasterViewController.m in Sources */,
+				23F45D0B18963D3400FF6696 /* AppRecord.m in Sources */,
+				23F45D1018963D3400FF6696 /* KXAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		23F45CDD1896344000FF6696 /* Main.storyboard */ = {
+		23F45CFB18963D3400FF6696 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				23F45CDE1896344000FF6696 /* Base */,
+				23F45CFC18963D3400FF6696 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		23F45CDF1896344000FF6696 /* InfoPlist.strings */ = {
+		23F45CFE18963D3400FF6696 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				23F45CE01896344000FF6696 /* en */,
+				23F45CFF18963D3400FF6696 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -340,13 +356,14 @@
 		};
 		A67C54F91890086800DA0E12 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 27F62028A6E1480884EA38FB /* Pods-KXLazyTableImage.xcconfig */;
+			baseConfigurationReference = F154B66741ED43EDAF4E8DD2 /* Pods.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "KXLazyTableImageExample/KXLazyTableImage-Prefix.pch";
-				INFOPLIST_FILE = "KXLazyTableImageExample/KXLazyTableImage-Info.plist";
+				GCC_PREFIX_HEADER = "KXLazyTableImageDemo/KXLazyTableImage-Prefix.pch";
+				INFOPLIST_FILE = "KXLazyTableImageDemo/KXLazyTableImage-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -354,13 +371,14 @@
 		};
 		A67C54FA1890086800DA0E12 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 27F62028A6E1480884EA38FB /* Pods-KXLazyTableImage.xcconfig */;
+			baseConfigurationReference = F154B66741ED43EDAF4E8DD2 /* Pods.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "KXLazyTableImageExample/KXLazyTableImage-Prefix.pch";
-				INFOPLIST_FILE = "KXLazyTableImageExample/KXLazyTableImage-Info.plist";
+				GCC_PREFIX_HEADER = "KXLazyTableImageDemo/KXLazyTableImage-Prefix.pch";
+				INFOPLIST_FILE = "KXLazyTableImageDemo/KXLazyTableImage-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

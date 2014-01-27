@@ -12,8 +12,8 @@
 #import <objc/runtime.h>
 #import <objc/objc.h>
 
-const char *kOperationQueueKey = "me.keroxp.app:operationQueue";
-const char *kDownloadsInProgressKey = "me.keroxp.app:downloadsInProgress";
+static const char *kOperationQueueKey = "me.keroxp.app:operationQueue";
+static const char *kDownloadsInProgressKey = "me.keroxp.app:downloadsInProgress";
 
 @implementation NSObject (LazyImageAspect)
 
