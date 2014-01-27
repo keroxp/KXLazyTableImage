@@ -2,7 +2,7 @@
 //  NSObject+LazyTableImageAspect.m
 //  KXLazyTableImage
 //
-//  Created by 桜井雄介 on 2014/01/22.
+//  Created by Yusuke Sakurai on 2014/01/22.
 //  Copyright (c) 2014年 Yusuke Sakurai. All rights reserved.
 //
 
@@ -20,10 +20,10 @@ const char *kDownloadsInProgressKey = "me.keroxp.app:downloadsInProgress";
     Method from_m = class_getInstanceMethod([self class], method1);
     Method to_m = class_getInstanceMethod([self class], method2);
     if (from_m) {
-        // メソッドが実装されていれば入れ替える
+        // exchange two methods if the reciever has an impl of method1
         method_exchangeImplementations(from_m, to_m);
     }else{
-        // メソッドが実装されていなければ追加してswizzleする
+        // unless no impl of method1, adding it and swizzling again
         IMP imp = method_getImplementation(to_m);
         void (^block)() = ^{};
         imp = imp_implementationWithBlock(block);
@@ -37,19 +37,19 @@ const char *kDownloadsInProgressKey = "me.keroxp.app:downloadsInProgress";
 
 - (void)useLazyTableImageAspect
 {
-    // methodを入れ替える
+    // exchange delegate methods
     [self swizzleMethod:@selector(scrollViewDidEndDecelerating:) withMethod:@selector(_scrollViewDidEndDecelerating:)];
     [self swizzleMethod:@selector(scrollViewDidEndDragging:willDecelerate:) withMethod:@selector(_scrollViewDidEndDragging:willDecelerate:)];
 }
 
 - (void)startImageDownloadForURL:(NSURL *)URL tableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath completaion:(void (^)(UIImage *, NSError *))completion
 {
-    // ダウンロードが開始済みなら何もしない
+    // if donwload for the index path is in progress, do nothing
     AFHTTPRequestOperation *operation = [self.downloadsInProgress objectForKey:indexPath];
     if (operation) {
         return;
     }
-    // ダウンロード処理
+    // making download operation
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -59,6 +59,7 @@ const char *kDownloadsInProgressKey = "me.keroxp.app:downloadsInProgress";
                 completion(image,nil);
             }];
         }else{
+            // if no completion handler, assigin image to image view automatically
             if ([[tableView indexPathsForVisibleRows] containsObject:indexPath]) {
                 UITableViewCell *cell= [tableView cellForRowAtIndexPath:indexPath];
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
@@ -75,9 +76,9 @@ const char *kDownloadsInProgressKey = "me.keroxp.app:downloadsInProgress";
         }
         [[self downloadsInProgress] removeObjectForKey:indexPath];
     }];
-    // リストに登録
+    // register operation to list
     [[self downloadsInProgress] setObject:operation forKey:indexPath];
-    // スクロール中でなければ開始
+    // unless table view is not scrolling, launch operation
     if (!tableView.dragging && !tableView.decelerating) {
         [self.operationQueue addOperation:operation];
     }
@@ -85,6 +86,7 @@ const char *kDownloadsInProgressKey = "me.keroxp.app:downloadsInProgress";
 
 - (void)loadImagesOnScreenRows:(UITableView*)tableview
 {
+    // spawn operations ready for start
     NSArray *is = [tableview indexPathsForVisibleRows];
     NSArray *operations = [[[self downloadsInProgress] objectsForKeys:is notFoundMarker:[NSNull null]] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(NSOperation* evaluatedObject, NSDictionary *bindings) {
         if ([evaluatedObject isKindOfClass:[NSOperation class]]
@@ -101,7 +103,6 @@ const char *kDownloadsInProgressKey = "me.keroxp.app:downloadsInProgress";
 - (void)_scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     [self _scrollViewDidEndDecelerating:scrollView];
-    // ダウンロード開始
     if ([scrollView isKindOfClass:[UITableView class]]) {
         [self loadImagesOnScreenRows:(UITableView*)scrollView];
     }
@@ -110,7 +111,6 @@ const char *kDownloadsInProgressKey = "me.keroxp.app:downloadsInProgress";
 - (void)_scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     [self _scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
-    // ダウンロード開始
     if (!decelerate && [scrollView isKindOfClass:[UITableView class]]) {
         [self loadImagesOnScreenRows:(UITableView*)scrollView];
     }
