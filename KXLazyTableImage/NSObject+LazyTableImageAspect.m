@@ -6,14 +6,14 @@
 //  Copyright (c) 2014年 Yusuke Sakurai. All rights reserved.
 //
 
-#import "UIResponder+LazyTableImageAspect.h"
+#import "NSObject+LazyTableImageAspect.h"
 #import <objc/runtime.h>
 #import <objc/objc.h>
 
 const char *kOperationQueueKey = "me.keroxp.app:operationQueue";
 const char *kDownloadsInProgressKey = "me.keroxp.app:downloadsInProgress";
 
-@implementation UIViewController (LazyImageAspect)
+@implementation NSObject (LazyImageAspect)
 
 - (void)swizzleMethod:(SEL)method1 withMethod:(SEL)method2
 {
@@ -127,6 +127,11 @@ const char *kDownloadsInProgressKey = "me.keroxp.app:downloadsInProgress";
         [self setOperationQueue:q];
     }
     return q;
+}
+
+- (void)setOperationQueue:(NSOperationQueue *)operationQueue
+{
+    objc_setAssociatedObject(self, kOperationQueueKey, operationQueue, OBJC_ASSOCIATION_RETAIN);
 }
 
 - (void)setDownloadsInProgress:(NSMutableDictionary *)downloadsInProgress

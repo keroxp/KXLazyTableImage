@@ -18,7 +18,7 @@
 
 @end
 
-@interface UIResponder (LazyImageAspect)
+@interface NSObject (LazyImageAspect)
 
 @property (nonatomic) NSMutableDictionary *downloadsInProgress;
 @property (nonatomic) NSOperationQueue *operationQueue;

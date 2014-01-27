@@ -8,7 +8,6 @@
 
 #import "KXMasterViewController.h"
 #import "KXDetailViewController.h"
-#import "UIResponder+LazyTableImageAspect.h"
 #import "AppRecord.h"
 
 @interface KXMasterViewController ()

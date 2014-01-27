@@ -22,7 +22,7 @@
 		A67C54EB1890086800DA0E12 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A67C54CA1890086800DA0E12 /* UIKit.framework */; };
 		A67C54F31890086800DA0E12 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A67C54F11890086800DA0E12 /* InfoPlist.strings */; };
 		A67C54F51890086800DA0E12 /* KXLazyTableImageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A67C54F41890086800DA0E12 /* KXLazyTableImageTests.m */; };
-		A67C55001890088700DA0E12 /* UIResponder+LazyTableImageAspect.m in Sources */ = {isa = PBXBuildFile; fileRef = A67C54FF1890088700DA0E12 /* UIResponder+LazyTableImageAspect.m */; };
+		A67C55001890088700DA0E12 /* NSObject+LazyTableImageAspect.m in Sources */ = {isa = PBXBuildFile; fileRef = A67C54FF1890088700DA0E12 /* NSObject+LazyTableImageAspect.m */; };
 		A67C550618900BEA00DA0E12 /* AppRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = A67C550518900BEA00DA0E12 /* AppRecord.m */; };
 		A67C55081890182C00DA0E12 /* ph@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A67C55071890182C00DA0E12 /* ph@2x.png */; };
 		C9A5926AB1614B68916E0174 /* libPods-KXLazyTableImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5032AC08E458413898235E2D /* libPods-KXLazyTableImage.a */; };
@@ -62,8 +62,8 @@
 		A67C54F01890086800DA0E12 /* KXLazyTableImageTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KXLazyTableImageTests-Info.plist"; sourceTree = "<group>"; };
 		A67C54F21890086800DA0E12 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A67C54F41890086800DA0E12 /* KXLazyTableImageTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KXLazyTableImageTests.m; sourceTree = "<group>"; };
-		A67C54FE1890088700DA0E12 /* UIResponder+LazyTableImageAspect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIResponder+LazyTableImageAspect.h"; sourceTree = "<group>"; };
-		A67C54FF1890088700DA0E12 /* UIResponder+LazyTableImageAspect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIResponder+LazyTableImageAspect.m"; sourceTree = "<group>"; };
+		A67C54FE1890088700DA0E12 /* NSObject+LazyTableImageAspect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+LazyTableImageAspect.h"; sourceTree = "<group>"; };
+		A67C54FF1890088700DA0E12 /* NSObject+LazyTableImageAspect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+LazyTableImageAspect.m"; sourceTree = "<group>"; };
 		A67C550418900BEA00DA0E12 /* AppRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppRecord.h; sourceTree = "<group>"; };
 		A67C550518900BEA00DA0E12 /* AppRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppRecord.m; sourceTree = "<group>"; };
 		A67C55071890182C00DA0E12 /* ph@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ph@2x.png"; sourceTree = "<group>"; };
@@ -129,8 +129,8 @@
 		A67C54CC1890086800DA0E12 /* KXLazyTableImage */ = {
 			isa = PBXGroup;
 			children = (
-				A67C54FE1890088700DA0E12 /* UIResponder+LazyTableImageAspect.h */,
-				A67C54FF1890088700DA0E12 /* UIResponder+LazyTableImageAspect.m */,
+				A67C54FE1890088700DA0E12 /* NSObject+LazyTableImageAspect.h */,
+				A67C54FF1890088700DA0E12 /* NSObject+LazyTableImageAspect.m */,
 				A67C550418900BEA00DA0E12 /* AppRecord.h */,
 				A67C550518900BEA00DA0E12 /* AppRecord.m */,
 				A67C54D51890086800DA0E12 /* KXAppDelegate.h */,
@@ -315,7 +315,7 @@
 				A67C54D31890086800DA0E12 /* main.m in Sources */,
 				A67C54D71890086800DA0E12 /* KXAppDelegate.m in Sources */,
 				A67C54DD1890086800DA0E12 /* KXMasterViewController.m in Sources */,
-				A67C55001890088700DA0E12 /* UIResponder+LazyTableImageAspect.m in Sources */,
+				A67C55001890088700DA0E12 /* NSObject+LazyTableImageAspect.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
