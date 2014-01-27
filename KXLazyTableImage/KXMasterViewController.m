@@ -8,6 +8,7 @@
 
 #import "KXMasterViewController.h"
 #import "KXDetailViewController.h"
+#import "NSObject+LazyTableImageAspect.h"
 #import "AppRecord.h"
 
 @interface KXMasterViewController ()
@@ -86,34 +87,28 @@
         cell.imageView.image = app.appIcon;
     }else{
         // まだならplaceholderを代入してlazy download を開始
-        if (!tableView.dragging && !tableView.decelerating) {
-            [self startImageDownloadForTableView:tableView atIndexPath:indexPath];
-        }
+        [self startImageDownloadForURL:app.appIconURL tableView:tableView atIndexPath:indexPath completaion:^(UIImage *image, NSError *error) {
+            if (!error) {
+                UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+                AppRecord *app = [self modelForTableView:tableView atIndexPath:indexPath];
+                app.appIcon = image;
+                [UIView transitionWithView:cell.imageView duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                    cell.imageView.image = image;
+                } completion:NULL];
+            }else{
+                UIAlertView *av = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"エラー", )
+                                                             message:error.localizedDescription
+                                                            delegate:nil
+                                                   cancelButtonTitle:@"OK"
+                                                   otherButtonTitles:nil, nil];
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    [av show];
+                }];
+            }
+        }];
         cell.imageView.image = [UIImage imageNamed:@"ph"];
     }
     return cell;
-}
-
-#pragma mark - Lazy Table Image
-
-- (NSURL *)lazyTableImageURLForTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath
-{
-    return [[self modelForTableView:tableView atIndexPath:indexPath] appIconURL];
-}
-
-- (void)lazyTableImageDidFinishDownload:(UIImage *)image forURL:(NSURL *)URL tableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    AppRecord *app = [self modelForTableView:tableView atIndexPath:indexPath];
-    app.appIcon = image;
-    [UIView transitionWithView:cell.imageView duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        cell.imageView.image = image;
-    } completion:NULL];
-}
-
-- (BOOL)lazyTableImageShouldStartDownloadForURL:(NSURL *)URL tableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath
-{
-    return [[self modelForTableView:tableView atIndexPath:indexPath] appIcon] ? NO : YES;
 }
 
 #pragma mark - Segue
@@ -131,19 +126,19 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSLog(@"scrolling!");
+//    NSLog(@"scrolling!");
     self.title = @"scrolling!";
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    NSLog(@"did end decelerating");
+//    NSLog(@"did end decelerating");
     self.title = @"end decelearating";
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    NSLog(@"did end dragging!");
+//    NSLog(@"did end dragging!");
     self.title = @"end dragging!";
 }
 

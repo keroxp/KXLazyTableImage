@@ -42,25 +42,21 @@ const char *kDownloadsInProgressKey = "me.keroxp.app:downloadsInProgress";
     [self swizzleMethod:@selector(scrollViewDidEndDragging:willDecelerate:) withMethod:@selector(_scrollViewDidEndDragging:willDecelerate:)];
 }
 
-- (void)startImageDownloadForTableView:(UITableView*)tableView atIndexPath:(NSIndexPath*)indexPath
+- (void)startImageDownloadForURL:(NSURL *)URL tableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath completaion:(void (^)(UIImage *, NSError *))completion
 {
-    // ダウンロード中なら何もしない
-    if ([self.downloadsInProgress objectForKey:indexPath]) {
+    // ダウンロードが開始済みなら何もしない
+    AFHTTPRequestOperation *operation = [self.downloadsInProgress objectForKey:indexPath];
+    if (operation) {
         return;
     }
-    // targetにurlに対して開始の是非を確認
-    NSURL *url = [[self target] lazyTableImageURLForTableView:tableView indexPath:indexPath];
-    if ([self.target respondsToSelector:@selector(lazyTableImageShouldStartDownloadForURL:tableView:indexPath:)]
-        && ![self.target lazyTableImageShouldStartDownloadForURL:url tableView:tableView indexPath:indexPath]) {
-        return;
-    }
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    // ダウンロード処理
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         UIImage *image = [[UIImage alloc] initWithData:responseObject];
-        if ([self.target respondsToSelector:@selector(lazyTableImageDidFinishDownload:forURL:tableView:indexPath:)]){
+        if (completion){
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                [[self target] lazyTableImageDidFinishDownload:image forURL:url tableView:tableView indexPath:indexPath];
+                completion(image,nil);
             }];
         }else{
             if ([[tableView indexPathsForVisibleRows] containsObject:indexPath]) {
@@ -74,24 +70,30 @@ const char *kDownloadsInProgressKey = "me.keroxp.app:downloadsInProgress";
         }
         [[self downloadsInProgress] removeObjectForKey:indexPath];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        UIAlertView *av = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"エラー", )
-                                                     message:error.localizedDescription
-                                                    delegate:nil
-                                           cancelButtonTitle:@"OK"
-                                           otherButtonTitles:nil, nil];
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            [av show];
-        }];
+        if (completion) {
+            completion(nil,error);
+        }
+        [[self downloadsInProgress] removeObjectForKey:indexPath];
     }];
+    // リストに登録
     [[self downloadsInProgress] setObject:operation forKey:indexPath];
-    [self.operationQueue addOperation:operation];
+    // スクロール中でなければ開始
+    if (!tableView.dragging && !tableView.decelerating) {
+        [self.operationQueue addOperation:operation];
+    }
 }
+
 - (void)loadImagesOnScreenRows:(UITableView*)tableview
 {
     NSArray *is = [tableview indexPathsForVisibleRows];
-    for (NSIndexPath *i in is) {
-        [self startImageDownloadForTableView:tableview atIndexPath:i];
-    }
+    NSArray *operations = [[[self downloadsInProgress] objectsForKeys:is notFoundMarker:[NSNull null]] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(NSOperation* evaluatedObject, NSDictionary *bindings) {
+        if ([evaluatedObject isKindOfClass:[NSOperation class]]
+            && [evaluatedObject isReady]) {
+            return YES;
+        }
+        return NO;
+    }]];
+    [[self operationQueue] addOperations:operations waitUntilFinished:NO];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -115,11 +117,6 @@ const char *kDownloadsInProgressKey = "me.keroxp.app:downloadsInProgress";
 }
 
 #pragma mark -
-
-- (UIResponder<LazyTableImageAspect>*)target
-{
-    return (UIResponder<LazyTableImageAspect>*)self;
-}
 
 - (NSOperationQueue *)operationQueue
 {
