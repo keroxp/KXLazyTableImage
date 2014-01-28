@@ -7,7 +7,6 @@
 //
 
 #import "NSObject+LazyTableImageAspect.h"
-#import <AFNetworking.h>
 
 #import <objc/runtime.h>
 #import <objc/objc.h>
