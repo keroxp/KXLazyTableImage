@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "KXLazyTableImage"
-  s.version      = "1.0.0"
+  s.version      = "0.0.1"
   s.summary      = "A small library for asychronous image dowonloading to UITableViewCell"
   s.description  = <<-DESC
                    A small library for asychronous image dowonloading to UITableViewCell
@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.author             = { "Yusuke Sakurai" => "kerokerokerop@gmail.com" }
   s.social_media_url = "http://twitter.com/keroxp"
   s.platform     = :ios, '6.0'
-  s.source       = { :git => "https://github.com/keroxp/KXLazyTableImage.git", :tag => "1.0.0" }
+  s.source       = { :git => "https://github.com/keroxp/KXLazyTableImage.git", :tag => "0.0.1" }
   s.source_files  = 'KXLazyTableImage', 'KXLazyTableImage/*.{h,m}'
   s.dependency 'AFNetworking', '~> 2.0.0'
 end
